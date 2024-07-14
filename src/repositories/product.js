@@ -1,32 +1,35 @@
-import products from '../models/product.js';
+import model from '../models/product.js';
 
-let productList = [...products];
+let products = [...model];
 
-const findAll = () => productList;
+const findAll = () => {
+    return products;
+}
 
 const create = (payload) => {
-    productList.push(payload);
+    products.push(payload);
     return payload;
 }
 
-const findOne = (id) => productList.find(product => product.id === parseInt(id));
+const findOne = (id) => {
+    const result = products.find(x => x.id === parseInt(id));
+    return result;
+}
 
 const remove = (id) => {
-    const index = productList.findIndex(product => product.id === parseInt(id));
+    const index = products.findIndex(item => item.id == id);
     if (index > -1) {
-        productList.splice(index, 1);
+        products.splice(index, 1);
         return true;
-    }
-    return false;
+    } else return false;
 }
 
 const update = (payload) => {
-    const index = productList.findIndex(product => product.id === payload.id);
+    const index = products.findIndex(item => item.id == payload.id);
     if (index > -1) {
-        productList[index] = payload;
+        products[index] = payload;
         return payload;
-    }
-    return null;
+    } else return null;
 }
 
 const repository = { findAll, create, findOne, remove, update };

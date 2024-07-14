@@ -30,8 +30,10 @@ const update = (req, res) => {
 }
 
 const sendResult = (result, res) => {
-    if (result) return res.status(200).json(result);
-    return res.status(500).json({ message: 'No encontrado.' });
+    if (result)
+        return res.status(200).json(result);
+    else
+        return res.status(500).json({ message: 'No encontrado.' });
 }
 
 const controller = { findAll, create, findOne, remove, update };
