@@ -1,32 +1,35 @@
-import users from '../models/user.js';
+import model from '../models/user.js';
 
-let userList = [...users];
+let users = [...model];
 
-const findAll = () => userList;
+const findAll = () => {
+    return users;
+}
 
 const create = (payload) => {
-    userList.push(payload);
+    users.push(payload);
     return payload;
 }
 
-const findOne = (id) => userList.find(user => user.id === parseInt(id));
+const findOne = (id) => {
+    const result = users.find(x => x.id === parseInt(id));
+    return result;
+}
 
 const remove = (id) => {
-    const index = userList.findIndex(user => user.id === parseInt(id));
+    const index = users.findIndex(item => item.id == id);
     if (index > -1) {
-        userList.splice(index, 1);
+        users.splice(index, 1);
         return true;
-    }
-    return false;
+    } else return false;
 }
 
 const update = (payload) => {
-    const index = userList.findIndex(user => user.id === payload.id);
+    const index = users.findIndex(item => item.id == payload.id);
     if (index > -1) {
-        userList[index] = payload;
+        users[index] = payload;
         return payload;
-    }
-    return null;
+    } else return null;
 }
 
 const repository = { findAll, create, findOne, remove, update };
